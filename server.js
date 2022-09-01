@@ -5,42 +5,45 @@ const PORT = 8000
 
 app.use(cors())
 
-let rappers = {
-    '21 savage': {
-        'age': 28,
-        'birthName': 'Shéyaa Bin Abraham-Joseph',
-        'birthdate': '22 October 1992', 
-        'birthLocation': 'London, England',
-        'origin': 'Atlanta, Georgia',
-        'genre': 'hip hop, trap, rap, horrorcore',
-        'occupation': 'rapper, songwriter, record producer',
-        'yearsActive': '2013-present',
-        'labels': 'Epic, Slaughter Gang',
-        'children': 3
+let mon = {
+    'node': {
+        'name': 'Node',
+        'types': ['electric'],
+        'desc': 'Can evolve into many things.', 
+        'moves': ['run'],
+        'evolves_into': ['npm','nodemon']
     },
-    'chance the rapper':{
-        'age': 28,
-        'birthName': 'Chancelor Jonathan Bennett',
-        'birthdate': 'April 16, 1993', 
-        'birthLocation': 'London, England',
-        'origin': 'Chicago, Illinois',
-        'genre': 'hip hop, alternative hip hop, r & b',
-        'occupation': 'rapper, singer, song writer, record producer, activist, actor, philanthropist',
-        'yearsActive': '2011-present',
-        'labels': 'none',
-        'children': 0
+    'nodemon': {
+        'name': 'Nodemon',
+        'types': ['dark','electric'],
+        'desc': 'A playful yet helpful demon.', 
+        'moves': ['refresh']
     },
-    'unknown':{
-        'age': 'unknown',
-        'birthName': 'unknown',
-        'birthdate': 'unknown', 
-        'birthLocation': 'unknown',
-        'origin': 'unknown',
-        'genre': 'unknown',
-        'occupation': 'unknown',
-        'yearsActive': 'unknown',
-        'labels': 'unknown',
-        'children': 'unknown'
+    'matui': {
+        'name': 'MatUI',
+        'types': ['fairy','psychic'],
+        'desc': 'Uses its visual powers to make things pretty.', 
+        'moves': ['light_screen']
+    },
+    'mongoose': {
+        'name': 'Mongoose',
+        'types': ['ground'],
+        'desc': '', 
+        'moves': ['schema'],
+        'evolves_into': ['mongoDB']
+    },
+    'mongoDB': {
+        'name': 'MongoDB',
+        'types': ['flying'],
+        'desc': 'Mongoose grows wings and takes to the cloud, becoming flying-type.', 
+        'moves': ['cluster','visualizer']
+    },
+    'error': {
+        'name': 'Error',
+        'types': ['dark','ghost'],
+        'desc': 'This mysterious creature appears only when the API is given a name that is not valid.', 
+        'moves': ['catch','message','stack_overflow'],
+        'evolves_into': ['cors']
     }
 }
 
@@ -48,15 +51,16 @@ app.get('/', (request, response) => {
     response.sendFile(__dirname + '/index.html')
 })
 
+//the : turns what's on the right side into params
 app.get('/api/:name', (request, response) => {
-    const rapperName = request.params.name.toLowerCase()
-    if(rappers[rapperName]){
-        response.json(rappers[rapperName])
+    const monName = request.params.name.toLowerCase()
+    if(mon[monName]){
+        response.json(mon[monName])
     }else{
-        response.json(rappers['unknown'])
+        response.json(mon['error'])
     }
 })
 
 app.listen(process.env.PORT || PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+    console.log(`Server running on port ${PORT}!`)
 })
